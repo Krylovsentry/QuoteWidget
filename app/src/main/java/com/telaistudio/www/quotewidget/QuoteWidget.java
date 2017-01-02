@@ -2,6 +2,7 @@ package com.telaistudio.www.quotewidget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
@@ -21,25 +22,16 @@ public class QuoteWidget extends AppWidgetProvider {
      */
     @Override
     public void onEnabled(Context context) {
-        RemoteViews widgetView = new RemoteViews(context.getPackageName(), R.layout.widget);
-        Quote quote;
-        try {
-            quote = new QuoteTask().execute().get();
-            widgetView.setTextViewText(R.id.quote_author, quote.getAuthor());
-            widgetView.setTextViewText(R.id.quote_text, quote.getQuote());
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
+        updateWidget(context);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        updateWidget(context);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
     }
 
     @Override
@@ -52,4 +44,18 @@ public class QuoteWidget extends AppWidgetProvider {
         super.onDisabled(context);
     }
 
+    private void updateWidget(Context context) {
+        RemoteViews widgetView = new RemoteViews(context.getPackageName(), R.layout.widget);
+        Quote quote;
+        try {
+            quote = new QuoteTask().execute().get();
+            widgetView.setTextViewText(R.id.quote_author, quote.getAuthor());
+            widgetView.setTextViewText(R.id.quote_text, quote.getQuote());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        ComponentName componentName = new ComponentName(context, QuoteWidget.class);
+        AppWidgetManager.getInstance(context).updateAppWidget(componentName, widgetView);
+    }
 }

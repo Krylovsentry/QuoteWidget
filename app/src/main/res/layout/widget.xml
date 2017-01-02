@@ -2,22 +2,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <ImageView
+        android:id="@+id/quote_logo"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:src="@drawable/quote_logo" />
+
 
 
     <TextView
         android:id="@+id/quote_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Man" />
+        android:layout_toEndOf="@id/quote_logo"
+        android:layout_toRightOf="@id/quote_logo"
+        android:text="@string/initial_author"
+        android:textSize="15sp"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/quote_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/quote_author"
-        android:text="Hello World!" />
-
+        android:layout_toEndOf="@id/quote_logo"
+        android:layout_toRightOf="@id/quote_logo"
+        android:text="@string/initial_quote" />
 
 </RelativeLayout>
