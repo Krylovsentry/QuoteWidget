@@ -22,21 +22,31 @@ public class QuoteWidget extends AppWidgetProvider {
      */
     @Override
     public void onEnabled(Context context) {
+        super.onEnabled(context);
         updateWidget(context);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
         updateWidget(context);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        updateWidget(context);
     }
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
+    }
+
+    @Override
+    public void onRestored(Context context, int[] oldWidgetIds, int[] newWidgetIds) {
+        super.onRestored(context, oldWidgetIds, newWidgetIds);
+        updateWidget(context);
     }
 
     @Override

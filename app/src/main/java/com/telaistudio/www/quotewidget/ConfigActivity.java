@@ -23,6 +23,6 @@ public class ConfigActivity extends Activity {
         //Extract id for widget
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        
+
     }
 }

@@ -18,7 +18,7 @@ public class Quote {
     }
 
     public Quote(@NonNull String quote) {
-        this("QuoteWidget",quote);
+        this("QuoteWidget", quote);
     }
 
     public String getAuthor() {

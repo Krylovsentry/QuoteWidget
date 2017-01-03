@@ -20,6 +20,7 @@
         android:id="@+id/quote_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
         android:layout_toEndOf="@id/quote_logo"
         android:layout_toRightOf="@id/quote_logo"
         android:text="@string/initial_author"
