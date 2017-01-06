@@ -1,6 +1,8 @@
 package com.telaistudio.www.quotewidget;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.support.test.espresso.core.deps.guava.base.Strings;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,17 +21,23 @@ import java.net.URL;
 public class QuoteTask extends AsyncTask<Void, Void, Quote> {
 
     private String urlString = "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=%s";
+    private String locale;
     private Quote quote;
+    private Context context;
+
+    public QuoteTask(Context context) {
+        this.context = context;
+    }
 
     protected void onPreExecute() {
-        super.onPreExecute();
+        locale = context.getResources().getString(R.string.locale);
     }
 
     @Override
     protected Quote doInBackground(Void... voids) {
 
         try {
-            URL url = new URL(String.format(urlString, "en"));
+            URL url = new URL(String.format(urlString, locale));
             //Create connection
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -49,7 +57,10 @@ public class QuoteTask extends AsyncTask<Void, Void, Quote> {
                 JSONObject jsonObject = new JSONObject(strBuilder.toString());
                 quote = extractQuote(jsonObject);
             } else {
-                //So here i should post the code, that must get quotes from the local storage if connection doesn't appeared
+                quote = new Quote(
+                        context.getResources().getString(R.string.initial_author),
+                        context.getResources().getString(R.string.initial_quote)
+                );
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -70,7 +81,7 @@ public class QuoteTask extends AsyncTask<Void, Void, Quote> {
         String author = jsonObject.getString("quoteAuthor");
         String quote = jsonObject.getString("quoteText");
 
-        if (author == null) {
+        if (Strings.isNullOrEmpty(author)) {
             return new Quote(quote);
         } else {
             return new Quote(author, quote);

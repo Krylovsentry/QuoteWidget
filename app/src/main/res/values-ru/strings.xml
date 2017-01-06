@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QuoteWidget</string>
+    <string name="english">Английский</string>
+    <string name="initial_author">Аристотетль</string>
+    <string name="initial_quote">Начало есть более чем половина всего.</string>
+    <string name="locale">ru</string>
+    <string name="russian">Русский</string>
+    <string name="submit">Подтвердить</string>
+</resources>
