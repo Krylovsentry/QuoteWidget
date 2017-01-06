@@ -2,7 +2,7 @@ package com.telaistudio.www.quotewidget;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.test.espresso.core.deps.guava.base.Strings;
+import android.text.TextUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,7 +81,7 @@ public class QuoteTask extends AsyncTask<Void, Void, Quote> {
         String author = jsonObject.getString("quoteAuthor");
         String quote = jsonObject.getString("quoteText");
 
-        if (Strings.isNullOrEmpty(author)) {
+        if (TextUtils.isEmpty(author)) {
             return new Quote(quote);
         } else {
             return new Quote(author, quote);
